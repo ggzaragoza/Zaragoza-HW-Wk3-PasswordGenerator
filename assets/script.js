@@ -18,9 +18,9 @@ function writePassword() {
   
   if (!validPasswordLength.includes(askLength)) {
     var needValidNum = confirm ("Please enter a valid number of characters for your new password.");
-  } else {
+    } else {
     alert ("Your new password will be " + askLength + " characters long.");
-  }
+    }
 
   console.log(askLength);
 
@@ -41,77 +41,119 @@ function writePassword() {
   var askSpecial = confirm("Would you like to include special characters in your new password?");
   console.log(askSpecial);
 
-
-  var alphaCharacters = "abcdefghijklmnopqrstuvwxyz".split("");
-  var upperCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  var numCharacters = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-  var specialCharacters = ["!", "#", "%", "&", "@", "$", "_"];
-  
-
-  function getAlpha() {
-    return alphaChoice = alphaCharacters[Math.floor(Math.random() * 26)];
-  }
-  console.log(getAlpha());
-
-  function getUpper() {
-    return upperChoice = upperCharacters[Math.floor(Math.random() * 26)];
-  }
-  console.log(getUpper());
-
-  function getNum() {
-    return numChoice = numCharacters[Math.floor(Math.random() * 10)];
-  }
-  console.log(getNum());
-
-  function getSpecial() {
-    return specialChoice = specialCharacters[Math.floor(Math.random() * 7)];
-  }
-  console.log(getSpecial());
-
-
-  function getCharacter() {
-    if (!askAlpha) {
-      return upperChoice || numChoice || specialChoice;
-    } else if (!askAlpha || !askUpper) {
-      return numChoice || specialChoice;
-    } else if (!askAlpha && !askUpper && !askNum) {
-      return specialChoice;
-    } else if (!askAlpha && !askUpper && !askNum && !askSpecial) {
-      alert("Please select at least one character type for your password.");
-      return askAlpha;
-    }
-  }
-  console.log(getCharacter());
-
-
-
-
-
-
-
-
-
-
-
-  //IGNORE THIS
-  const allowedPwordFunctions = {
-    lowercase: askAlpha,
-    uppercase: askUpper,
-    numbers: askNum,
-    specials: askSpecial
+  var confirmedPwordCriteria = {
+    askLength: askLength,
+    askAlpha: askAlpha,
+    askUpper: askUpper,
+    askNum: askNum,
+    askSpecial: askSpecial,
   }
 
+  if (askAlpha === false && askUpper === false && askNum === false && askSpecial === false) {
+    alert("Please select at least one character set to be used for generating your new password.");
+    return writePassword();
+  }
 
-
-
-
-  
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
+  return confirmedPwordCriteria;
 
 }
 
+
+
+var alphaCharacters = "abcdefghijklmnopqrstuvwxyz".split("");
+var upperCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+var numCharacters = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var specialCharacters = ["!", "#", "%", "&", "@", "$", "_"];
+
+
+
+function getCharacterFrom(characterSet) {
+  var randomCharacter = Math.floor(Math.random() * characterSet.length);
+  var result = characterSet[randomCharacter];
+  return result;
+}
+
+
+
+function generatePassword() {
+  var initWrite = writePassword();
+  var potentialCharacterSets = [];
+  var chosenCharacters = [];
+  var newPassword = [];
+
+  if (initWrite.askAlpha) {
+    potentialCharacterSets = potentialCharacterSets.concat(alphaCharacters);
+    chosenCharacters.push(getCharacterFrom(alphaCharacters));
+  }
+  if (initWrite.askUpper) {
+    potentialCharacterSets = potentialCharacterSets.concat(upperCharacters);
+    chosenCharacters.push(getCharacterFrom(upperCharacters));
+  }
+  if (initWrite.askNum) {
+    potentialCharacterSets = potentialCharacterSets.concat(numCharacters);
+    chosenCharacters.push(getCharacterFrom(numCharacters));
+  }
+  if (initWrite.askSpecial) {
+    potentialCharacterSets = potentialCharacterSets.concat(specialCharacters);
+    chosenCharacters.push(getCharacterFrom(specialCharacters));
+  }
+
+  for (var i = 0; i < initWrite.askLength; i++) {
+    var characterChoices = getCharacterFrom(potentialCharacterSets);
+    newPassword.push(characterChoices);
+    }
+
+  for (var i = 0; i < chosenCharacters.length; i++) {
+    newPassword[i] = chosenCharacters[i];
+    }
+  
+  return newPassword.join("");
+}
+
+
+
+
+function passwordGenerator() {
+
+  var password = generatePassword();
+
+  var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
+}
+
+
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", passwordGenerator);
+
+
+
+
+
+
+
+// function randomCharacterSelection() {
+
+//   var alphaChoice = function() {
+//     return alphaCharacters[Math.floor(Math.random() * 26)];
+//   }
+//   console.log(alphaChoice());
+//   var upperChoice = function() {
+//     return upperCharacters[Math.floor(Math.random() * 26)];
+//   }
+//   console.log(upperChoice());
+//   var numChoice = function() {
+//     return numCharacters[Math.floor(Math.random() * 10)];
+//   }
+//   console.log(numChoice());
+//   var specialChoice = function() {
+//     return specialCharacters[Math.floor(Math.random() * 7)];
+//   }
+//   console.log(specialChoice());
+
+// } 
+
+
+
+
+
