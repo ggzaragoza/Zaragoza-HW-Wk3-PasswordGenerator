@@ -12,6 +12,8 @@ function writePassword() {
   if (askLength < 8 || askLength > 128) {
     alert ("Please enter a valid number of characters for your new password.");
     return writePassword();
+  } else {
+    alert ("Your new password will be " + askLength + " characters long.");
   }
 
   // var minPwordLength = 8;
@@ -117,11 +119,8 @@ function generatePassword() {
 
 
 function passwordGenerator() {
-
   var password = generatePassword();
-
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
 }
 
