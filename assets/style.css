@@ -36,7 +36,7 @@ h1 {
 
 .card {
   background-color: hsl(0, 0%, 100%);
-  border-radius: 50px;
+  border-radius: 100px;
   border-width: 1px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 8px 0px;
   color: hsl(206, 17%, 28%);
@@ -47,9 +47,10 @@ h1 {
 }
 
 .card-header h2 {
-    text-align: center;
-    font-weight: 275;
-    letter-spacing: 1px;
+  text-align: center;
+  font-weight: 275;
+  letter-spacing: 1px;
+  padding-bottom: 30px;
 }
 
 .card-header::after {
@@ -91,10 +92,11 @@ h1 {
   display: inline-block;
   color: #58595b;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 18px;
-  letter-spacing: 1px;
+  font-size: 16px;
+  letter-spacing: 2px;
   line-height: 22px;
-  margin: 16px 16px 16px 20px;
+  margin: 45px;
+  margin-bottom: 26px;
   padding: 20px 34px;
   text-align: center;
   cursor: pointer;
@@ -122,10 +124,8 @@ button[disabled] {
   padding-bottom: 85px;
   font-size: 1.2rem;
   text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 2px dashed #c0c7cf;
-  border-radius: 6px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   resize: none;
   overflow: hidden;
 }
