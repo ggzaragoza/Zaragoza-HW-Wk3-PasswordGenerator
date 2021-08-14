@@ -9,25 +9,28 @@ function writePassword() {
   // Asks user for password length, will return alert if input is not a valid password length
   var askLength = parseInt(prompt("Please choose the length of your new password by entering a number value between 8 and 128. Passwords can be 8-128 characters long."), 10);
 
-  var minPwordLength = 8;
-
-  var validPasswordLength = [minPwordLength]
-    for (var i = 0; i < 121; i++) {
-      validPasswordLength.push(i + 8)
-    }
-  
-  if (!validPasswordLength.includes(askLength)) {
-    var needValidNum = confirm ("Please enter a valid number of characters for your new password.");
-    } else {
-    alert ("Your new password will be " + askLength + " characters long.");
-    }
-
-  console.log(askLength);
-
-  if (needValidNum) {
-    writePassword();
+  if (askLength < 8 || askLength > 128) {
+    alert ("Please enter a valid number of characters for your new password.");
+    return writePassword();
   }
 
+  // var minPwordLength = 8;
+
+  // var validPasswordLength = [minPwordLength]
+  //   for (var i = 0; i < 121; i++) {
+  //     validPasswordLength.push(i + 8)
+  // }
+    
+  // if (!validPasswordLength.includes(askLength)) {
+  //   var needValidNum = confirm ("Please enter a valid number of characters for your new password.");
+  //   } else {
+  //   alert ("Your new password will be " + askLength + " characters long.");
+  // }
+
+  // if (needValidNum) {
+  //   writePassword();
+  // }
+  debugger
 
 
 
@@ -55,7 +58,7 @@ function writePassword() {
   }
 
   return confirmedPwordCriteria;
-
+  
 }
 
 
